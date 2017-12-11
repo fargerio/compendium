@@ -3,10 +3,10 @@ module Compendium
     helper Compendium::ReportsHelper
     include Compendium::ReportsHelper
 
-    before_filter :find_report
-    before_filter :find_query
-    before_filter :validate_options, only: [:run, :export]
-    before_filter :run_report, only: [:run, :export]
+    before_action :find_report
+    before_action :find_query
+    before_action :validate_options, only: %i[run export]
+    before_action :run_report, only: %i[run export]
 
     def setup
       render_setup
@@ -46,7 +46,7 @@ module Compendium
       end
     end
 
-  private
+    private
 
     def find_report
       @prefix = params[:report_name]
